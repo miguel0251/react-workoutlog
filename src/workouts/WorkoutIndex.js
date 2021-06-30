@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import WorkoutCreate from './WorkoutCreate';
+import WorkoutTable from './WorkoutTable';
+import WorkoutEdit from './WorkoutEdit';
 
 const WorkoutIndex = (props) => {
   const [workouts, setWorkouts] = useState([]);
   const fetchWorkouts = () => {
-    fetch('http://localhost:3000/log', {
+    fetch('http://localhost:8080/workoutlog', {
       method: 'GET',
       headers: new Headers({
         'Content-Type': 'application/json',
-        Authorization: `Bearer${props.token}`,
+        Authorization: `Bearer ${props.token}`,
       }),
     })
       .then((res) => res.json())
@@ -33,9 +35,11 @@ const WorkoutIndex = (props) => {
           ></WorkoutCreate>
         </Col>
         <Col md="9">
-          <h2>
-            Log a workout to see a table. This will be added in later pages
-          </h2>
+          <WorkoutTable
+            workouts={workouts}
+            fetchWorkouts={fetchWorkouts}
+            token={props.token}
+          ></WorkoutTable>
         </Col>
       </Row>
     </Container>
