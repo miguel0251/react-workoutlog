@@ -4,22 +4,22 @@ import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 const WorkoutCreate = (props) => {
   const [description, setDescription] = useState('');
   const [definition, setDefinition] = useState('');
-  const [result, setResult] = useState('');
+  const [results, setResults] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch('http://localhost:8080/log', {
+    fetch('http://localhost:8080/workoutlog/create', {
       method: 'POST',
       body: JSON.stringify({
-        log: {
+        workoutlog: {
           description: description,
           definition: definition,
-          result: result,
+          results: results,
         },
       }),
       headers: new Headers({
         'Content-Type': 'application/json',
-        Authorization: `Bearer${props.token}`,
+        Authorization: `Bearer ${props.token}`,
       }),
     })
       .then((res) => res.json())
@@ -27,7 +27,7 @@ const WorkoutCreate = (props) => {
         console.log(logData);
         setDescription('');
         setDefinition('');
-        setResult('');
+        setResults('');
         props.fetchWorkouts();
       });
   };
@@ -35,17 +35,17 @@ const WorkoutCreate = (props) => {
   return (
     <>
       <h3>Log a Workout</h3>
-      <Form>
+      <Form onSubmit={handleSubmit}>
         <FormGroup>
-          <Label htmlFor="description"></Label>
+          <Label htmlFor="description" />
           <Input
             name="description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-          ></Input>
+          />
         </FormGroup>
         <FormGroup>
-          <Label htmlFor="definition"></Label>
+          <Label htmlFor="definition" />
           <Input
             type="select"
             name="definition"
@@ -58,12 +58,12 @@ const WorkoutCreate = (props) => {
           </Input>
         </FormGroup>
         <FormGroup>
-          <Label htmlFor="result"></Label>
+          <Label htmlFor="result" />
           <Input
             name="result"
-            value={result}
-            onChange={(e) => setResult(e.target.value)}
-          ></Input>
+            value={results}
+            onChange={(e) => setResults(e.target.value)}
+          />
         </FormGroup>
         <Button type="submit">Click to Submit</Button>
       </Form>

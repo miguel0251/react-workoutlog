@@ -7,7 +7,7 @@ import WorkoutEdit from './WorkoutEdit';
 const WorkoutIndex = (props) => {
   const [workouts, setWorkouts] = useState([]);
   const fetchWorkouts = () => {
-    fetch('http://localhost:8080/workoutlog', {
+    fetch('http://localhost:8080/workoutlog/mine', {
       method: 'GET',
       headers: new Headers({
         'Content-Type': 'application/json',
