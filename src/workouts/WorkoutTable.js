@@ -18,11 +18,19 @@ const WorkoutTable = (props) => {
       return (
         <tr key={index}>
           <th scope="row">{workout.id}</th>
-          <td>{workout.result}</td>
+          <td>{workout.results}</td>
           <td>{workout.description}</td>
           <td>{workout.definition}</td>
           <td>
-            <Button color="warning">Update</Button>
+            <Button
+              color="warning"
+              onClick={() => {
+                props.editUpdateWorkout(workout);
+                props.updateOn();
+              }}
+            >
+              Update
+            </Button>
             <Button
               color="danger"
               onClick={() => {

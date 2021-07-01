@@ -13,7 +13,7 @@ import {
 const WorkoutEdit = (props) => {
   const [editDesc, setEditDesc] = useState(props.workoutToUpdate.description);
   const [editDef, setEditDef] = useState(props.workoutToUpdate.definition);
-  const [editRes, setEditRes] = useState(props.workoutToUpdate.result);
+  const [editRes, setEditRes] = useState(props.workoutToUpdate.results);
   const workoutUpdate = (Event, workout) => {
     Event.preventDefault();
     fetch(
@@ -21,7 +21,11 @@ const WorkoutEdit = (props) => {
       {
         method: 'PUT',
         body: JSON.stringify({
-          log: { description: editDesc, definition: editDef, result: editRes },
+          workoutlog: {
+            description: editDesc,
+            definition: editDef,
+            results: editRes,
+          },
         }),
         headers: new Headers({
           'Content-Type': 'application/json',
@@ -69,7 +73,7 @@ const WorkoutEdit = (props) => {
               <option value="Distance">Distance</option>
             </Input>
           </FormGroup>
-          <Button type="submit">Update the workout</Button>
+          <Button type="submit">Update the workout!</Button>
         </Form>
       </ModalBody>
     </Modal>

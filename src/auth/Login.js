@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
 
 const Login = (props) => {
-  const [username, setUsername] = useState(''); //2
+  const [email, setEmail] = useState(''); //2
   const [password, setPassword] = useState(''); //2
 
-  const handleSubmit = (Event) => {
-    Event.preventDefault();
+  const handleSubmit = (event) => {
+    event.preventDefault();
     fetch('http://localhost:8080/user/login', {
       method: 'POST',
       body: JSON.stringify({
-        user: { username: username, password: password },
+        user: { email: email, password: password },
       }),
       headers: new Headers({
         'Content-Type': 'application/json',
@@ -20,7 +20,6 @@ const Login = (props) => {
       .then((data) => {
         props.updateToken(data.sessionToken);
       });
-    //console.log(username, password);
   };
 
   return (
@@ -28,12 +27,12 @@ const Login = (props) => {
       <h1>Login</h1>
       <Form onSubmit={handleSubmit}>
         <FormGroup>
-          <Label htmlFor="username">Username</Label>
+          <Label htmlFor="username">UserName</Label>
           <Input
-            onChange={(e) => setUsername(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
             name="username"
-            value={username}
-          ></Input>
+            value={email}
+          />
         </FormGroup>
         <FormGroup>
           <Label htmlFor="password">Password</Label>
@@ -41,7 +40,7 @@ const Login = (props) => {
             onChange={(e) => setPassword(e.target.value)}
             name="password"
             value={password}
-          ></Input>
+          />
         </FormGroup>
         <Button type="submit">Login</Button>
       </Form>

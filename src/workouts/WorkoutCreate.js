@@ -8,6 +8,7 @@ const WorkoutCreate = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     fetch('http://localhost:8080/workoutlog/create', {
       method: 'POST',
       body: JSON.stringify({
@@ -39,10 +40,16 @@ const WorkoutCreate = (props) => {
         <FormGroup>
           <Label htmlFor="description" />
           <Input
-            name="description"
+            type="select"
+            name="definition"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-          />
+          >
+            <option value=" ">Select: Upper, Core or Lower body</option>
+            <option value="Upper">Upper</option>
+            <option value="Core">Core</option>
+            <option value="Lower">Lower</option>
+          </Input>
         </FormGroup>
         <FormGroup>
           <Label htmlFor="definition" />
@@ -52,18 +59,25 @@ const WorkoutCreate = (props) => {
             value={definition}
             onChange={(e) => setDefinition(e.target.value)}
           >
+            <option value=" ">Select: Time, Weight or Distance</option>
             <option value="Time">Time</option>
             <option value="Weight">Weight</option>
             <option value="Distance">Distance</option>
           </Input>
         </FormGroup>
         <FormGroup>
-          <Label htmlFor="result" />
+          <Label htmlFor="results" />
           <Input
-            name="result"
+            type="select"
+            name="results"
             value={results}
             onChange={(e) => setResults(e.target.value)}
-          />
+          >
+            <option value=" ">Select: Intense, Moderate or Casual</option>
+            <option value="Intense">Intense</option>
+            <option value="Moderate">Moderate</option>
+            <option value="Casual">Casual</option>
+          </Input>
         </FormGroup>
         <Button type="submit">Click to Submit</Button>
       </Form>
